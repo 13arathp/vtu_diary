@@ -90,6 +90,15 @@
 
 <div id="calendar"></div>
 
+
+
+
+<!-- ================= GET PREVIOUS ENTRIES JSON ================= -->
+
+<div id="get_prev_json" style="margin-top: 2rem;">
+  <button onclick="getPrevJson()">Click here to get Previous Details (whatever you have filled till now)</button>
+</div>
+
 <!-- ================= CONTENT INPUT ================= -->
 
 <div style="margin-top: 2rem;">
@@ -229,6 +238,33 @@ function addOneDay(dateStr) {
   date.setDate(date.getDate() + 1);
   return date.toISOString().split("T")[0];
 }
+
+
+//////////////////////////////////////////////////////
+// GET PREVIOUS DATA
+//////////////////////////////////////////////////////
+
+function getPrevJson() {
+  fetch("/getPrevJson", {
+  method: "GET",
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (!data) {
+      const div = document.createElement("div");
+      div.style.marginTop = "10px";
+      div.textContent = "Get previous data failed";
+      div.style.color = "red";
+      document.getElementById("get_prev_json").appendChild(div);
+      return;
+    }
+
+
+
+  })
+}
+
+
 
 //////////////////////////////////////////////////////
 // GENERATE JSON
